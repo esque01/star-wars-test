@@ -81,7 +81,7 @@ export default function CharacterCard() {
             <Typography variant="body1" sx={{ color: 'text.secondary' }}>
             {/* <strong>Species:</strong> {character?.species.length > 0 ? character?.species.join(", ") : "N/A"} */}
             </Typography>
-            <Typography variant="body1" sx={{ color: 'text.secondary' }}>
+            <Typography variant="body1" sx={{ colgor: 'text.secondary' }}>
             {/* <strong>Vehicles:</strong> {character?.length > 0 ? character?.vehicles.join(", ") : "N/A"}
             </Typography>
             <Typography variant="body1" sx={{ color: 'text.secondary' }}>

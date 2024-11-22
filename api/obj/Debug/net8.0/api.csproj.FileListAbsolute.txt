@@ -30,3 +30,4 @@ c:\Users\esque\development\apt-manufacturing\applicant-test\star-wars-test\api\o
 c:\Users\esque\development\apt-manufacturing\applicant-test\star-wars-test\api\obj\Debug\net8.0\api.pdb
 c:\Users\esque\development\apt-manufacturing\applicant-test\star-wars-test\api\obj\Debug\net8.0\api.genruntimeconfig.cache
 c:\Users\esque\development\apt-manufacturing\applicant-test\star-wars-test\api\obj\Debug\net8.0\ref\api.dll
+c:\Users\esque\development\apt-manufacturing\applicant-test\star-wars-test\api\obj\Debug\net8.0\api.sourcelink.json

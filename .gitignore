@@ -4,6 +4,7 @@
 
 # API
 /api/obj
+/api/appsettings*
 
 /.pnp
 .pnp.js

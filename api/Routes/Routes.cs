@@ -1,5 +1,12 @@
-namespace StarWars.API.Routes;
+namespace StarWars.API;
 
-class Routes {
-    public const string GetStarWarsCharacter = "/people";
+public static class Routes {
+
+    public const string BaseUrl = "https://swapi.dev/api/";
+
+
+    public static class Characters
+    {
+        public const string GetStarWarsCharacter = BaseUrl + "people/{0}";
+    }
 }

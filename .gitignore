@@ -3,6 +3,7 @@
 /react/build
 
 # API
+/api/obj
 
 /.pnp
 .pnp.js

@@ -18,11 +18,12 @@ public class StarWarsCharacter {
     public List<string> Films { get; set; }
     public List<string> Species { get; set; }
     public List<string> Vehicles { get; set; }
+
+    [JsonPropertyName("starships")]
     public List<string> StarShips { get; set; }
     public DateTime Created { get; set; }
     public DateTime Edited { get; set; }
     public string Url { get; set; }
-
 
     public StarWarsCharacter() {}
 }

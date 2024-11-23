@@ -4,7 +4,6 @@
 
 # API
 /api/obj
-/api/bin
 /api/appsettings*
 
 /.pnp

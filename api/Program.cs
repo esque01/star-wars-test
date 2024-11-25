@@ -1,4 +1,7 @@
+using System.Text;
 using System.Text.Json;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +12,16 @@ builder.Services.AddControllers()
     });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => 
+{
+    options.TokenValidationParameters = new TokenValidationParameters {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true, 
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("thisisaverylong256bitsecretkey12345678")) 
+    };
+});
 builder.Services.AddHttpClient();
 builder.Services.AddCors(options => {
     options.AddPolicy("ReactFrontend", policy => 
@@ -30,6 +43,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 app.UseCors("ReactFrontend");

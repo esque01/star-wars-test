@@ -3,7 +3,6 @@ using System.Text.Json.Serialization;
 namespace StarWars.API.Models;
 
 public class StarWarsCharacter {
-    
     public string Name { get; set; }
     public string Height { get; set; }
     public string Mass { get; set; }

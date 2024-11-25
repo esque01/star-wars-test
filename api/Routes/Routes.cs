@@ -7,6 +7,10 @@ public static class Routes {
 
     public static class Characters
     {
-        public const string GetStarWarsCharacter = BaseUrl + "people/{0}";
+        public const string StarWarsCharactersURI = BaseUrl + "people";
+    }
+    public static class User 
+    {
+        public const string LoginURI = "/api/login";
     }
 }

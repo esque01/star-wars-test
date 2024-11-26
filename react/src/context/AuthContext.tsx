@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import APIClient from "../data/APIClient";
 
 interface AuthContextProps {
     isAuthenticated: boolean;
@@ -17,25 +18,95 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
+
     useEffect(() => {
         checkAuthStatus();
     }, []); 
+
 
     const logout = async() => {
         setIsAuthenticated(false);
         localStorage.removeItem("jwt");
     }
 
-    const checkAuthStatus = () => {
+
+    const checkAuthStatus = async() => {
+
         const token: string | null = localStorage.getItem("jwt");
 
-        if (token) {
-            setIsAuthenticated(true);
+        try {
+            if (token) {
+                const isValid = await validateToken(token);
+
+                if (isValid) {
+                    setIsAuthenticated(true);
+                }
+                else {
+                    await refreshToken(token);
+                }
+            }
+            else {
+                setIsAuthenticated(false);
+            }
+        } 
+        catch (error) {
+            setIsAuthenticated(false);  
         }
-        else {
-            setIsAuthenticated(false);
+        finally {
+            setIsLoading(false);
         }
-        setIsLoading(false);
+    }
+
+
+    const validateToken = async(token: string) => {
+        try {
+            const response = await APIClient.post('/validate-token', { token }, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}` 
+                }
+            });
+
+            if (response.status === 200) {
+                return true;
+            }
+            else if (response.status === 401) {
+                return false;
+            }
+
+            return false;
+        } 
+        catch (error: any) {
+            if (error.response) {
+                if (error.response.status === 401) {
+                    return false;
+                }
+            }
+            return false;
+        }
+    }
+
+
+    const refreshToken = async(token: string) => {
+        try {
+            const response = await APIClient.post('/refresh-token', { token }, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}` 
+                }
+            });
+
+            if (response.status === 200) {
+                localStorage.setItem("jwt", response.data);
+                setIsAuthenticated(true);
+            }
+            else {
+                setIsAuthenticated(false);
+            }
+        } 
+        catch (error: any) {
+            console.log(error);
+        }
     }
 
     if (isLoading) {
